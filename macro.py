@@ -61,9 +61,8 @@ class ui:
 
 			try:
 				if key.char == self.macrostop:
+					print("stop macro")
 					listener.stop()
-					self.running = False
-					# filename and save file
 					filename = "test.txt"
 					self.save(filename)
 			except:
@@ -75,7 +74,10 @@ class ui:
 			self.eventlist.append(msg)
 
 		# start recording inputs
-		if self.running == False:
+
+		if self.running == True:
+			return
+		elif self.running == False:
 			listener = keyboard.Listener(
 				on_press=on_press,
 				on_release=on_release)
@@ -105,6 +107,7 @@ class ui:
 		file.close()
 
 		self.eventlist = []
+		self.running = False
 
 	def load(self, file=""):
 		print("load macro function ran")
