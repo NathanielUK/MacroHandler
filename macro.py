@@ -22,6 +22,7 @@ class ui:
 		self.running = False
 		self.eventlist = []
 		self.executelist = []
+		self.foldername = "scripts"
 		self.main()
 
 	def main(self):
@@ -53,23 +54,36 @@ class ui:
 		# log mouse/keyboard action
 
 		def on_press(key):
-			msg = str(key) + " down"
+
+			msg = "{}/down:{}".format(key, time.time())
+			msg = msg.replace("'","")
 			print(msg)
 			self.eventlist.append(msg)
 
 			# in a catch method because it crashes when ? pressed
 
 			try:
-				if key.char == self.macrostop:
+				if key != key.space and key.char == self.macrostop:
 					print("stop macro")
 					listener.stop()
 					filename = "test.txt"
 					self.save(filename)
 			except:
-				pass
+
+				try:
+					if key.char == self.macrostop:
+						print("stop macro")
+						listener.stop()
+						filename = "test.txt"
+						self.save(filename)
+				except:
+					pass
+		
 
 		def on_release(key):
-			msg = str(key) + " up"
+
+			msg = "{}/up:{}".format(key, time.time())
+			msg = msg.replace("'","")
 			print(msg)
 			self.eventlist.append(msg)
 
@@ -88,19 +102,17 @@ class ui:
 	def save(self, filename):
 		print("save macro function ran")
 
-		foldername = "scripts"
-
 		# test inputs
 		# self.eventlist = ["g","a","y"]
 		self.eventlist.remove(self.eventlist[-1])
 
-		if os.path.isdir(foldername):
+		if os.path.isdir(self.foldername):
 			pass
 		else:
-			os.mkdir(foldername)
+			os.mkdir(self.foldername)
 
 		# write input to txt
-		findpath = foldername+"\\"+filename
+		findpath = self.foldername+"\\"+filename
 		file = open(findpath, "w")
 		for line in self.eventlist:
 			file.write(str(line) + "\n")

@@ -1,28 +1,3 @@
-'l' down
-'l' up
-'e' down
-'e' up
-'t' down
-'s' down
-'t' up
-Key.space down
-'s' up
-Key.space up
-'g' down
-'o' down
-'g' up
-'o' up
-Key.space down
-Key.space up
-'g' down
-'g' up
-'a' down
-'m' down
-'a' up
-'m' up
-'e' down
-'e' up
-'r' down
-'s' down
-'r' up
-'s' up
+./up:1611832728.25425
+Key.space/down:1611832729.2144632
+Key.space/up:1611832729.310361

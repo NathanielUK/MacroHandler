@@ -1,0 +1,1 @@
+self.macrostop often not picked up in on_press function
