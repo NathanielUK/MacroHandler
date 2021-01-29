@@ -65,7 +65,6 @@ class ui:
 			if self.running:
 
 				msg = ("{}/down:{}".format(key, time.time()))
-				#msg = msg.replace("'","")
 				print(msg)
 				self.eventlist.append([msg])
 
@@ -94,7 +93,30 @@ class ui:
 			if self.running:
 
 				msg = ("{}/up:{}".format(key, time.time()))
-				#msg = msg.replace("'","")
+				print(msg)
+				self.eventlist.append([msg])
+
+		def on_move(x, y):
+
+			if self.running:
+
+				msg = ("{},{}:{}".format(x,y,time.time()))
+				print(msg)
+				self.eventlist.append([msg])
+
+		def on_click(x, y, button, pressed):
+
+			if self.running:
+
+				msg = ("{},{},{},{}:{}".format(x,y,button,pressed,time.time()))
+				print(msg)
+				self.eventlist.append([msg])
+
+		def on_scroll(x, y, dx, dy):
+
+			if self.running:
+
+				msg = ("{},{},{},{}:{}".format(x,y,dx,dy,time.time()))
 				print(msg)
 				self.eventlist.append([msg])
 
@@ -104,10 +126,18 @@ class ui:
 		if self.running == True:
 			return
 		elif self.running == False:
+
 			listener = keyboard.Listener(
 				on_press=on_press,
 				on_release=on_release)
 			listener.start()
+
+			listener2 = mouse.Listener(
+				on_move=on_move,
+				on_click=on_click,
+				on_scroll=on_scroll)
+			listener2.start()
+
 			self.running = True
 
 
